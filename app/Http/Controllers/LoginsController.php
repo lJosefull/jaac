@@ -72,6 +72,7 @@ class LoginsController extends Controller
                     $user->profile_type=1;
                     $user->role='user';
                     $user->save();
+                    auth()->login($user);
                     return "seguardo";
                 }else
                 {
@@ -87,6 +88,7 @@ class LoginsController extends Controller
                     'Password'=>'required',
                     'Password2'=>'required'
                      ]);
+
                  if ($validator->fails()) {
                 return back()
                 ->withErrors($validator)
@@ -104,7 +106,16 @@ class LoginsController extends Controller
                   $user->profile_type=2;
                   $user->role='business';
                   $user->save();
+                  auth()->login($user);
                   return "seguardo la empresa";
+            
+                  
+                  
+                  
+                  
+                  
+                  
+                  
               }else
               {
                return redirect()->back()->with('flas_message_erros','contraseña no son iguales');
