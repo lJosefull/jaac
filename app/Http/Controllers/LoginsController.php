@@ -17,7 +17,7 @@ class LoginsController extends Controller
      */
     public function index()
     {
-        //
+        return view('auth.profile.profile');
     }
 
     /**
@@ -38,7 +38,7 @@ class LoginsController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         if ($request->isMethod('post')) {
          $type=$request->type;
 
@@ -63,16 +63,20 @@ class LoginsController extends Controller
 
                 if($request->Password==$request->Password2)
                 {
+
                     $user= new User();
-                    $user->name=$request->First_name." ". $request->Last_name;
+                    $user->name=$request->First_name." " .$request->Last_name;
                     $user->first_name=$request->First_name;
                     $user->last_name=$request->Last_name;
                     $user->email=$request->Email;
-                    $user->password=$request->Password;
+                    $user->password=bcrypt($request->Password);
                     $user->profile_type=1;
+                    $user->cb_roles_id=0;
                     $user->role='user';
                     $user->save();
                     auth()->login($user);
+
+
                     return "seguardo";
                 }else
                 {
@@ -102,20 +106,14 @@ class LoginsController extends Controller
                   $user->name=$request->Business_name;
                   $user->business_name=$request->Business_name;
                   $user->email=$request->Email;
-                  $user->password=$request->Password;
+                  $user->password=bcrypt($request->Password);
                   $user->profile_type=2;
+                  $user->cb_roles_id=0;
                   $user->role='business';
+
                   $user->save();
                   auth()->login($user);
                   return "seguardo la empresa";
-            
-                  
-                  
-                  
-                  
-                  
-                  
-                  
               }else
               {
                return redirect()->back()->with('flas_message_erros','contraseña no son iguales');

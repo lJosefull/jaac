@@ -30,14 +30,14 @@
                             <a href="#test-form" class="login popup-with-form">
                                 <i class="flaticon-user"></i>
                                 <span>log in</span>
-                             </a>    
+                             </a>
                         @endif
                         @else
-                        <a href="#" class="login popup-with-form">
+                        <a href="#" class="login">
                                 <i class="flaticon-user"></i>
                                 <span> {{ Auth::user()->name }}</span>
-                             </a> 
-                         @endif    
+                             </a>
+                         @endif
 
                             </div>
                     </div>
