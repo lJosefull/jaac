@@ -33,7 +33,7 @@
                              </a>
                         @endif
                         @else
-                        <a href="#" class="login">
+                        <a href="{{ asset('/profile') }}" class="login">
                                 <i class="flaticon-user"></i>
                                 <span> {{ Auth::user()->name }}</span>
                              </a>

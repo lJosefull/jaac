@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\TryCatch;
 use Swift;
+use Auth;
 use App\User;
 use Illuminate\Support\Facades\Validator;
 use validateRequest;
@@ -17,7 +18,13 @@ class LoginsController extends Controller
      */
     public function index()
     {
+        if(Auth::check()){
+
         return view('auth.profile.profile');
+        }else{
+        return redirect()->route('welcome');
+        }
+
     }
 
     /**
@@ -75,6 +82,7 @@ class LoginsController extends Controller
                     $user->role='user';
                     $user->save();
                     auth()->login($user);
+                    return redirect()->route('profile');
 
 
                     return "seguardo";
@@ -113,7 +121,7 @@ class LoginsController extends Controller
 
                   $user->save();
                   auth()->login($user);
-                  return "seguardo la empresa";
+                  return redirect()->route('home');
               }else
               {
                return redirect()->back()->with('flas_message_erros','contraseña no son iguales');
