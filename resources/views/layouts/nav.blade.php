@@ -33,10 +33,18 @@
                              </a>
                         @endif
                         @else
-                        <a href="{{ asset('/profile') }}" class="login">
-                                <i class="flaticon-user"></i>
-                                <span> {{ Auth::user()->name }}</span>
-                             </a>
+                            <div class="main-menu  d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                                <li><a href="#">{{ Auth::user()->name }} <i class="ti-angle-down"></i></a>
+                                                    <ul class="submenu">
+                                                        <li><a href="{{ asset('/profile') }}">Perfil</a></li>
+                                                        <li><a href="{{ Auth::logout() }}">Cerrar Sesion</a></li>
+                                                    </ul>
+                                                </li>
+                                        </ul>
+                                    </nav>
+                                </div>
                          @endif
 
                             </div>

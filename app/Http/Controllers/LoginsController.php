@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\TryCatch;
 use Swift;
 use Auth;
+use App\Education;
+use DB;
 use App\User;
 use Illuminate\Support\Facades\Validator;
 use validateRequest;
@@ -19,8 +21,12 @@ class LoginsController extends Controller
     public function index()
     {
         if(Auth::check()){
-
-        return view('auth.profile.profile');
+            $DB=DB::table('departamentos')->get();
+            $Education=Education::all();
+        return view('auth.profile.profile',[
+            'Education' =>$Education,
+            'DB'=>$DB
+        ]);
         }else{
         return redirect()->route('welcome');
         }
@@ -82,7 +88,7 @@ class LoginsController extends Controller
                     $user->role='user';
                     $user->save();
                     auth()->login($user);
-                    return redirect()->route('profile');
+                    return redirect('profile');
 
 
                     return "seguardo";

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>jaac</title>
 
@@ -17,6 +18,7 @@
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('css/slicknav.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
 
 
 </head>
@@ -55,18 +57,18 @@
     <script src="{{ asset('js/main.js') }}"></script>
     <script>
             $(document).on('click', '.user', function() {
-                
+
             $('#profile_User').show();
             $('#profile_Business').hide();
             });
-            
+
             $(document).on('click', '.business', function() {
             $('#profile_User').hide();
             $('#profile_Business').show();
             });
-           
-           
+
+
            </script>
-           
+
 </body>
 </html>

@@ -13,12 +13,12 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('profile', 'LoginsController');
-
+Route::post('/select', 'SelectController@select');
 Auth::routes();
