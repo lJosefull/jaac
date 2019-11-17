@@ -11,10 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
-
+ Route::get('/', 'HomeController@index')->name('welcome');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -22,4 +19,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('profile', 'LoginsController');
 
 Route::post('/select', 'SelectController@select');
+Route::post('profile/select', 'SelectController@select');
 Auth::routes();
+Route::post('search','SelectController@search')->name('search');

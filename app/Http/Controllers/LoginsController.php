@@ -199,8 +199,8 @@ class LoginsController extends Controller
        $user->title_id=$request->titulo;
        $user->age=$request->edad;
        $user->type_sex=$request->sexo;
-       $user->city_id=$request->departamentos;
-       $user->state_id=$request->city;
+       $user->city_id=$request->city;
+       $user->state_id=$request->departamentos;
        $user->complet=$request->complet;
        $user->save();
       return redirect()->back();

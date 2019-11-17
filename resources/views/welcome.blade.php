@@ -16,56 +16,46 @@
 
     <section class="search-sec">
             <div class="container">
-                <form action="#" method="post" novalidate="novalidate">
+                <form>
+                    @csrf
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="row">
                                     <div class="col-lg-2 col-md-2 col-sm-12 p-0">
-                                            <select class="form-control search-slt" id="exampleFormControlSelect1">
-                                                <option>Select Vehicle</option>
-                                                <option>Example one</option>
-                                                <option>Example one</option>
-                                                <option>Example one</option>
-                                                <option>Example one</option>
-                                                <option>Example one</option>
-                                                <option>Example one</option>
+                                            <select class="form-control search-slt select" data-type="2" name="state">
+                                                <option value="">Departamento</option>
+                                               @foreach ( $departamentos as $departamento )
+                                               <option value="{{ $departamento->id_departamento }}">{{ $departamento->departamento }}</option>
+                                               @endforeach
                                             </select>
                                         </div>
                                     <div class="col-lg-2 col-md-3 col-sm-12 p-0">
-                                            <select class="form-control search-slt" id="exampleFormControlSelect1">
-                                                <option>Select Vehicle</option>
-                                                <option>Example one</option>
-                                                <option>Example one</option>
-                                                <option>Example one</option>
-                                                <option>Example one</option>
-                                                <option>Example one</option>
-                                                <option>Example one</option>
+                                            <select class="form-control search-slt select3" id="exampleFormControlSelect1" name="city">
+                                                <option value="">Municipio</option>
+                                                @foreach ($municipios as $municipio )
+                                                <option class="opcioned" value="{{ $municipio->id_municipio }}">{{ $municipio->municipio }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                 <div class="col-lg-3 col-md-2 col-sm-12 p-0">
-                                        <select class="form-control search-slt" id="exampleFormControlSelect1">
-                                            <option>Select Vehicle</option>
-                                            <option>Example one</option>
-                                            <option>Example one</option>
-                                            <option>Example one</option>
-                                            <option>Example one</option>
-                                            <option>Example one</option>
-                                            <option>Example one</option>
+                                        <select class="form-control search-slt select" data-type="1" name="educacion">
+                                            <option value="">Educacion</option>
+                                           @foreach ($educacions as $educacion )
+                                           <option value="{{ $educacion->id }}">{{ $educacion->name }}</option>
+                                           @endforeach
                                         </select>
                                     </div>
                                 <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                    <select class="form-control search-slt" id="exampleFormControlSelect1">
-                                        <option>Select Vehicle</option>
-                                        <option>Example one</option>
-                                        <option>Example one</option>
-                                        <option>Example one</option>
-                                        <option>Example one</option>
-                                        <option>Example one</option>
-                                        <option>Example one</option>
+                                    <select class="form-control search-slt select2" id="exampleFormControlSelect1" name="title">
+                                        <option value="">Titulo</option>
+                                        @foreach ($tipo_educacions as $tipo_educacion )
+                                           <option class="opcioned" value="{{ $tipo_educacion->id }}">{{ $tipo_educacion->name }}</option>
+
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-lg-2 col-md-1 col-sm-12 p-0">
-                                    <button type="button" class="btn btn-danger wrn-btn">Search</button>
+                                    <button type="button" class="btn btn-danger wrn-btn search">Search</button>
                                 </div>
                             </div>
                         </div>
@@ -75,21 +65,28 @@
         </section>
     @endif
     </section>
+    <section class="section-search" style="display:none;">
+    <div class="container">
+     <div class="row">
 
+
+     </div>
+    </div>
+    </section>
     <section class="section-one">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-4">
-                    <h4>Gran cantidad de componentes</h4>
-                    <p>El kit viene con componentes diseñados para lucir perfectos juntos. Todos los componentes encajan perfectamente entre sí.</p>
+                    <h4>  Que es JAAC?  </h4>
+                    <p>Es una pagina de empleo que en vez de tu buscar para quien trabajar ellos te buscan a ti y tu podras ver cual es el lugar mas favorable para trabajar.</p>
                 </div>
                 <div class="col-12 col-md-4">
-                    <h4>Gran cantidad de componentes</h4>
-                    <p>El kit viene con componentes diseñados para lucir perfectos juntos. Todos los componentes encajan perfectamente entre sí.</p>
+                    <h4>Mision</h4>
+                    <p>Disminuir drasticamente el desempleo en el pais.</p>
                 </div>
                 <div class="col-12 col-md-4">
-                    <h4>Gran cantidad de componentes</h4>
-                    <p>El kit viene con componentes diseñados para lucir perfectos juntos. Todos los componentes encajan perfectamente entre sí.</p>
+                    <h4>Vision</h4>
+                    <p>Estar en todos los paises del mundo.</p>
                 </div>
             </div>
         </div>
@@ -101,8 +98,8 @@
                     <img class="img-responsive" src="./img/jaac.png" alt="">
                 </div>
                 <div class="col-12 col-md-6">
-                    <h4>Componentes básicos</h4>
-                    <p>Cambiamos el estilo de cada elemento Bootstrap 4 para que coincida con el estilo del Kit de papel. Todos los componentes de Bootstrap 4 que necesita en un desarrollo se han rediseñado con el nuevo aspecto. Además de los numerosos elementos básicos, también hemos creado clases adicionales. Todos estos elementos te ayudarán a llevar tu proyecto al siguiente nivel.</p>
+                    <h4>Necesitas Registrarte</h4>
+                    <p>Simplemente dale en donde dice login y abajo hay una pestaña que dice registrate es muy facil.</p>
                 </div>
             </div>
         </div>

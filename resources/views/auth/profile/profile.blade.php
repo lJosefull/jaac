@@ -215,50 +215,5 @@
         </div>
     </div>
 </div>
-<script>
-$(document).on('change','.select',function(){
-    $.ajaxSetup(
-     {
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
-    id=$(this).val();
 
-    type=$(this).data('type')
-    console.log("typo:",type)
-    $.ajax({
-       type:'POST',
-       url:'select',
-       dataType:'json',
-       data:{id:id,type:type},
-       success:function(data){
-           switch (type) {
-               case 1:
-                    console.log("DATA:",data)
-                    $('.opcionec').remove();
-                    $.each(data, function(index, c) {
-                    $('.select2').append('<option class="opcionec" value="'+c.id+'">'+c.name+'</option> ');
-
-                    });
-                   break;
-
-               case 2:
-                   console.log("DATA:",data)
-                    $('.opcioned').remove();
-                    $.each(data, function(index, c) {
-                    $('.select3').append('<option class="opcioned" value="'+c.id_municipio+'">'+c.municipio+'</option> ');
-
-                    });
-                   break;
-
-           }
-
-      },
-      error:function(data){
-       console.log("no funciona",data);
-     }
-   });
-});
-</script>
 @endsection
