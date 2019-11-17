@@ -22,9 +22,11 @@ class LoginsController extends Controller
     {
         if(Auth::check()){
             $DB=DB::table('departamentos')->get();
+            $profile=Auth::user();
             $Education=Education::all();
         return view('auth.profile.profile',[
             'Education' =>$Education,
+            'profile'=>$profile,
             'DB'=>$DB
         ]);
         }else{
@@ -173,7 +175,35 @@ class LoginsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $validator = Validator::make($request->all(),[
+
+            'educacion'=>'required|string',
+            'titulo'=>'required',
+            'edad'=>'required',
+            'sexo'=>'required',
+            'departamentos'=>'required',
+            'city'=>'required',
+            'tel'=>'required',
+            'complet'=>'required'
+             ]);
+
+         if ($validator->fails()) {
+        return back()
+        ->withErrors($validator)
+        ->withInput()
+        ->with('flash_message_errors','Algun problema  Paso');
+      }
+       $user= User::find(Auth::user()->id);
+       $user->educacion_id=$request->educacion;
+       $user->title_id=$request->titulo;
+       $user->age=$request->edad;
+       $user->type_sex=$request->sexo;
+       $user->city_id=$request->departamentos;
+       $user->state_id=$request->city;
+       $user->complet=$request->complet;
+       $user->save();
+      return redirect()->back();
     }
 
     /**

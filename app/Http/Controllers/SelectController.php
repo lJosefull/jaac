@@ -15,6 +15,7 @@ class SelectController extends Controller
     public function select(Request $request){
         try
         {
+
             switch ($request->type) {
                 case 1:
                 $data= Education_type::where('education_id',$request->id)

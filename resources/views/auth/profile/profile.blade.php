@@ -26,37 +26,60 @@
             <div class="row">
 
             <div class="col-md-12 order-md-1">
-                <h4 class="mb-3">Billing address</h4>
-                <form class="needs-validation" novalidate>
+@if($profile->complet==0)
+                <h4 class="mb-3">Completar Registro</h4>
+                <form class="needs-validation" method="POST" action="{{ url('profile',[$profile->id]) }}">
+                        @if(count($errors)>0)
+                        <ul>
+                          @foreach($errors->all() as $error)
+                          <li style="background-color:rgba(255,0,0,0.3); color: #fff;height: auto;line-height: 10px;    height: 30px;
+               line-height: 25px;
+               background-color: #f8d7da;
+               color: #721c24;
+               border-color: #f5c6cb;
+               /* margin-left: 10px; */
+               border-radius: .25rem;
+               padding-left: 28px;">{{$error}}</li>
+                           @endforeach
+                        </ul>
+                        @endif
+                        @method('PUT')
+                        @csrf
                         <div class="row">
                                 <div class="col-md-5 mb-3">
                                   <label for="Educacion">Educacion</label>
-                                  <select class="custom-select d-block w-100 select" data-type="1" required>
+                                  <select class="custom-select d-block w-100 select" name="educacion" data-type="1" required>
                                     <option value="">Educacion...</option>
                                    @foreach ( $Education as $Educations )
                                    <option value="{{ $Educations->id }}">{{ $Educations->name }}</option>
                                    @endforeach
                                   </select>
-                                  <div class="invalid-feedback">
-                                    Please select a valid country.
-                                  </div>
+                                  @error('password')
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                                 @enderror
                                 </div>
                                 <div class="col-md-4 mb-3">
                                   <label for="state">Titulo</label>
-                                  <select class="custom-select d-block w-100 select2"  required>
+                                  <select class="custom-select d-block w-100 select2"  name="titulo" required>
                                     <option value="">Titulo...</option>
 
                                   </select>
-                                  <div class="invalid-feedback">
-                                    Please provide a valid state.
-                                  </div>
+                                  @error('password')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                     @enderror
                                 </div>
                                 <div class="col-md-3 mb-3">
                                         <label for="state">Edad</label>
-                                        <input type="number" class="form-control" id="Edad" placeholder="Edad">
-                                        <div class="invalid-feedback">
-                                    Please provide a valid state.
-                                 </div>
+                                        <input type="number" class="form-control" id="Edad" name="edad"  placeholder="Edad">
+                                        @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                       @enderror
                                 </div>
                               </div>
                               <div class="row">
@@ -65,45 +88,60 @@
                   <div class="mb-3 col-md-3">
                     <label for="address2">Sexo</label>
 
-                    <select class="custom-select d-block w-100 select" id="state" required>
-                            <option value="">Choose...</option>
-                            <option>California</option>
+                    <select class="custom-select d-block w-100 select" id="sexo" name="sexo"  required>
+                            <option value="1">Masculino</option>
+                            <option value="2">Femenino</option>
                           </select>
-                          <div class="invalid-feedback">
-                            Please provide a valid state.
-                   </div>
+                          @error('password')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                         @enderror
                   </div>
                 </div>
                   <div class="row">
                     <div class="col-md-5 mb-3">
                       <label for="country">Departamentos</label>
-                      <select class="custom-select d-block w-100 select" data-type="2"  required>
+                      <select class="custom-select d-block w-100 select" data-type="2"  name="departamentos" required>
                             @foreach ( $DB as $DB )
                             <option value="{{ $DB->id_departamento }}">{{ $DB->departamento }}</option>
                             @endforeach
                       </select>
-                      <div class="invalid-feedback">
-                        Please select a valid country.
-                      </div>
+
+                      @error('password')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                     @enderror
                     </div>
                     <div class="col-md-4 mb-3">
                       <label for="state">Ciudad</label>
-                      <select class="custom-select d-block w-100 select3" data-type="2" required>
+                      <select class="custom-select d-block w-100 select3" data-type="2" name="city" required>
                         <option value="">Ciudad...</option>
-                        <option>California</option>
                       </select>
-                      <div class="invalid-feedback">
-                        Please provide a valid state.
-                      </div>
+                      @error('password')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                     @enderror
                     </div>
                     <div class="col-md-3 mb-3">
                       <label for="Phone">Telefono</label>
-                      <input type="text" class="form-control" id="zip" placeholder="" required>
-                      <div class="invalid-feedback">
-                        Zip code required.
-                      </div>
+                      <input type="number" class="form-control" id="tel" placeholder="" name="tel" required>
+                      <input type="hidden" class="form-control" id="hidden" placeholder="" name="complet" value="1" required>
+                      @error('password')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                     @enderror
                     </div>
+                     <div class="col-md-3 mb-3">
+
+                     <button type="submit" class="btn btn-success">Guardar</button>
+                     </div>
                   </div>
+                </form>
+@else
             <div class="row">
                 <div class="col-md-6 ml-auto mr-auto">
                     <div class="profile-tabs">
@@ -130,6 +168,8 @@
                     </div>
             </div>
         </div>
+
+
     </div>
     </div>
       <div class="tab-content tab-space">
@@ -171,8 +211,7 @@
               </div>
           </div>
       </div>
-
-
+      @endif
         </div>
     </div>
 </div>
@@ -208,7 +247,7 @@ $(document).on('change','.select',function(){
                    console.log("DATA:",data)
                     $('.opcioned').remove();
                     $.each(data, function(index, c) {
-                    $('.select3').append('<option class="opcioned" value="'+c.id+'">'+c.municipio+'</option> ');
+                    $('.select3').append('<option class="opcioned" value="'+c.id_municipio+'">'+c.municipio+'</option> ');
 
                     });
                    break;

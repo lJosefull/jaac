@@ -1,60 +1,50 @@
-<header>
-    <div class="header-area ">
-        <div id="sticky-header" class="main-header-area">
-            <div class="container-fluid p-0">
-                <div class="row align-items-center no-gutters">
-                    <div class="col-xl-2 col-lg-2">
-                        <div class="JAAC-img">
-                            <a href="index.html">
-                                <img src="img/JAAC.png" alt="">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-7 col-lg-7">
-                        <div class="main-menu  d-none d-lg-block">
-                            <nav>
-                                <ul id="navigation">
-                                    <li><a class="active" href="index.html">Inicio</a></li>
-                                    <li><a href="package.html"></a></li>
-                                    <li><a href="Support.html">Quejas y reclamos</a></li>
-                                    <li><a href="about.html">Ayuda</a></li>
-                                    <li><a href="contact.html">Contactanos</a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 d-none d-lg-block">
-                        <div class="log_chat_area d-flex align-items-center">
-                        @guest
-                        @if (Route::has('register'))
-                            <a href="#test-form" class="login popup-with-form">
-                                <i class="flaticon-user"></i>
-                                <span>log in</span>
-                             </a>
-                        @endif
-                        @else
-                            <div class="main-menu  d-none d-lg-block">
-                                    <nav>
-                                        <ul id="navigation">
-                                                <li><a href="#">{{ Auth::user()->name }} <i class="ti-angle-down"></i></a>
-                                                    <ul class="submenu">
-                                                        <li><a href="{{ asset('/profile') }}">Perfil</a></li>
-                                                        <li><a href="{{ Auth::logout() }}">Cerrar Sesion</a></li>
-                                                    </ul>
-                                                </li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                         @endif
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                {{ config('app.name', 'Laravel') }}
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left Side Of Navbar -->
+                <ul class="navbar-nav mr-auto">
+
+                </ul>
+
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @endif
+                    @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                             </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="mobile_menu d-block d-lg-none"></div>
-                    </div>
-                </div>
+                        </li>
+                    @endguest
+                </ul>
             </div>
         </div>
-    </div>
-</header>
-
+    </nav>
