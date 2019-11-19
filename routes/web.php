@@ -24,3 +24,5 @@ Route::post('/select', 'SelectController@select');
 Route::post('profile/select', 'SelectController@select');
 Auth::routes();
 Route::post('search','SelectController@search')->name('search');
+
+Route::post('createvideo','StreamingController@createvideo')->name('createvideo');

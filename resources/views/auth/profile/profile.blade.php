@@ -174,18 +174,52 @@
     </div>
       <div class="tab-content tab-space">
         <div class="tab-pane active text-center gallery" id="studio">
+            @if($verifi==0)
+                <div class="container">
+                        <div class="row">
+                            <div class="col-lg-4 center"></div>
+                            <div class="col-lg-4 center">
+                             <form action="{{ url('createvideo') }}" enctype="multipart/form-data" method="POST">
+                                {{ csrf_field() }}
+                                              <input type="file" class="custom-file-input" id="customFile" name="file">
+                                              <label class="custom-file-label" for="customFile">Video</label>
+                                              <button type="submit" class="btn btn-outline-success">Guardar Video</button>
+
+                                </form>
+                            </div>
+                            <div class="col-lg-4 center"></div>
+                        </div>
+                    </div>
+            @endif
               <div class="row">
-                  <div class="col-md-3 ml-auto">
-                      <img src="https://images.unsplash.com/photo-1524498250077-390f9e378fc0?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=83079913579babb9d2c94a5941b2e69d&auto=format&fit=crop&w=751&q=80" class="rounded">
-                      <img src="https://images.unsplash.com/photo-1528249227670-9ba48616014f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=66b8e7db17b83084f16fdeadfc93b95b&auto=format&fit=crop&w=357&q=80" class="rounded">
-                  </div>
-                  <div class="col-md-3 mr-auto">
-                      <img src="https://images.unsplash.com/photo-1521341057461-6eb5f40b07ab?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=72da2f550f8cbd0ec252ad6fb89c96b2&auto=format&fit=crop&w=334&q=80" class="rounded">
-                      <img src="https://images.unsplash.com/photo-1506667527953-22eca67dd919?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6326214b7ce18d74dde5e88db4a12dd5&auto=format&fit=crop&w=750&q=80" class="rounded">
-                  </div>
+                    @if($verifi>0)
+                    <div class="col-lg-12">
+
+
+                            <video width="640" height="360" controls>
+                                    <source src="{{secure_asset(asset($urlvideo->url))}}" type="video/mp4">
+                                    Tu navegador no soporta HTML5 video.
+                              </video>
+                      </div>
+                      @endif
               </div>
           </div>
         <div class="tab-pane text-center gallery" id="works">
+                <div class="container">
+                        <div class="row">
+                            <div class="col-lg-4 center"></div>
+                            <div class="col-lg-4 center">
+                                    <form>
+
+                                            <input type="file" class="custom-file-input" id="customFile">
+                                            <label class="custom-file-label" for="customFile">Fotos</label>
+                                            <button type="button" class="btn btn-outline-success">Guardar Fotos</button>
+
+                              </form>
+                            </div>
+                            <div class="col-lg-4 center"></div>
+                        </div>
+                    </div>
               <div class="row">
                   <div class="col-md-3 ml-auto">
                   <img src="https://images.unsplash.com/photo-1524498250077-390f9e378fc0?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=83079913579babb9d2c94a5941b2e69d&auto=format&fit=crop&w=751&q=80" class="rounded">
@@ -198,16 +232,9 @@
               </div>
           </div>
         <div class="tab-pane text-center gallery" id="favorite">
+
               <div class="row">
-                  <div class="col-md-3 ml-auto">
-                    <img src="https://images.unsplash.com/photo-1504346466600-714572c4b726?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6754ded479383b7e3144de310fa88277&auto=format&fit=crop&w=750&q=80" class="rounded">
-                  <img src="https://images.unsplash.com/photo-1494028698538-2cd52a400b17?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=83bf0e71786922a80c420c17b664a1f5&auto=format&fit=crop&w=334&q=80" class="rounded">
-                  </div>
-                  <div class="col-md-3 mr-auto">
-                    <img src="https://images.unsplash.com/photo-1505784045224-1247b2b29cf3?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ec2bdc92a9687b6af5089b335691830e&auto=format&fit=crop&w=750&q=80" class="rounded">
-                    <img src="https://images.unsplash.com/photo-1524498250077-390f9e378fc0?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=83079913579babb9d2c94a5941b2e69d&auto=format&fit=crop&w=751&q=80" class="rounded">
-                    <img src="https://images.unsplash.com/photo-1506667527953-22eca67dd919?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6326214b7ce18d74dde5e88db4a12dd5&auto=format&fit=crop&w=750&q=80" class="rounded">
-                  </div>
+
               </div>
           </div>
       </div>
@@ -215,5 +242,12 @@
         </div>
     </div>
 </div>
+<script>
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function() {
+          var fileName = $(this).val().split("\\").pop();
+          $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+        </script>
 
 @endsection
