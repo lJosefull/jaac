@@ -70,10 +70,10 @@ $(document).on('click', '.search', function () {
             console.log(data)
             $('.section-search').show()
             $('.section-search .container .row .filter').remove();
-            $.each(data, function (index, c) {
+            $.each(data, function (index, user) {
 
                 $('.section-search .container .row').append(
-                    ' <div class="col-md-4 filter"  ><div class="card"><img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" alt="Card image cap"><div class="card-body"><h4 class="card-title">Card title</h4><p class="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p><a href="#" class="btn btn-primary">Button</a></div></div></div> ');
+                    ' <div class="col-md-4 filter"  ><div class="card"><img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" alt="Card image cap"><div class="card-body"><h4 class="card-title">'+user.name+'</h4><p class="card-text"></p><p class="card-text">'+user.education_name+'</p><p class="card-text">'+user.education_type_name+'</p><a href="/profile/'+user.id+'" class="btn btn-primary">Button</a></div></div></div> ');
                 });
                  },
                  error:function(data){

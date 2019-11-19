@@ -126,125 +126,66 @@
 
             <div class="form-signin">
 
-        <form method="POST" action="{{ url('logins') }}">
-            @csrf
-            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Iniciar Sesión</h1>
-               <input id="email" placeholder="Email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-            <input id="password" placeholder="Contraseña" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                    <div class="form-group row">
+                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-            <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Ingresar</button>
+                        <div class="col-md-6">
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
-            <hr>
-            <!-- <p>Don't have an account!</p>  -->
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
 
-            </form>
+                    <div class="form-group row">
+                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
-<button class="btn btn-primary btn-block" type="button" id="btn-signup"><i class="fas fa-user-plus"></i> Registrate</button>
+                        <div class="col-md-6">
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-6 offset-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                <label class="form-check-label" for="remember">
+                                    {{ __('Remember Me') }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-0">
+                        <div class="col-md-8 offset-md-4">
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('Login') }}
+                            </button>
+
+                            @if (Route::has('password.request'))
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+                </form>
+            <a class="btn btn-primary btn-block" href="{{ url('register')}}">Registrate</a>
 </div>
-        <div class="form-signup">
 
-
-                <div class="social-login">
-                    <button class="btn facebook-btn social-btn btn-register" data-register="1" type="button"><span><i class="user"></i> Usuario</span> </button>
-                </div>
-                <div class="social-login">
-                    <button class="btn google-btn social-btn btn-register" data-register="2" type="button"><span><i class="business"></i> Empresa</span> </button>
-                </div>
-                <div id="user" class="register">
-                    <p style="text-align:center">Usuario</p>
-                    <form method="POST" action="{{ route('register') }}" class="">
-                            @csrf
-                      <input id="name" placeholder="Nombre" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                      <input id="last_name" placeholder="Apellido" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
-
-                                    @error('last_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-
-                     <input id="email" placeholder="Email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-
-                   <input id="password" placeholder="Contraseña" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-
-                                    @enderror
-
-                    <input id="password-confirm"  placeholder="Confirmar contraseña" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-
-                    <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-user-plus"></i>
-                                       Registrar
-                        </button>
-                        </form>
-                </div>
-
-
-                <div id="business" class="register">
-                    <p style="text-align:center">Usuario</p>
-                    <form method="POST" action="{{ route('register') }}" class="">
-                            @csrf
-                      <input id="business_name" placeholder="Nombre de la Empresa" type="text" class="form-control @error('business_name') is-invalid @enderror" name="business_name" value="{{ old('business_name') }}" required autocomplete="business_name" autofocus>
-
-                                    @error('business_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-
-
-                     <input id="email" placeholder="Email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-
-                   <input id="password" placeholder="Contraseña" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-
-                                    @enderror
-
-                    <input id="password-confirm"  placeholder="Confirmar contraseña" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-
-                    <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-user-plus"></i>
-                                       Registrar
-                        </button>
-                        </form>
-                </div>
-         </div>
-    </div>
     <p style="text-align:center">
         <a href="http://bit.ly/2RjWFMfunction toggleResetPswd(e){
     e.preventDefault();
@@ -293,8 +234,8 @@ $(document).on('click','.btn-register', function(){
 
  data=$(this).data('register');
    if(data==1){
-    $('#business').hide();
-    $('#user').show(); // display:block or none
+       $('#business').hide();
+       $('#user').show(); // display:block or none
      // display:block or none
    }else if(data==2){
     $('#user').hide()
@@ -303,6 +244,7 @@ $(document).on('click','.btn-register', function(){
      // display:block or none
   }
 });
+
 </script>
 </body>
 

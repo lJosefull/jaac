@@ -13,7 +13,9 @@
 
  Route::get('/', 'HomeController@index')->name('welcome');
 Auth::routes();
-
+ Route::get('register/business', function () {
+     return view('auth.profile.business');
+ });
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('profile', 'LoginsController');

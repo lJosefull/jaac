@@ -51,7 +51,7 @@ class SelectController extends Controller
             $query = User::query();
 
             $query->when(request('title') != null, function ($q) {
-                return $q->where('title_id', request('title'));
+                return $q->where('education_type', request('title'));
             });
             $query->when(request('state') != null, function ($q) {
                 return $q->where('state_id', request('state'));
@@ -62,7 +62,7 @@ class SelectController extends Controller
             });
 
             $query->when(request('educacion') != null, function ($q) {
-                return $q->where('educacion_id', request('educacion'));
+                return $q->where('education_id', request('educacion'));
             });
 
 

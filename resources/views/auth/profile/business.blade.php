@@ -125,18 +125,11 @@
     <div id="logreg-forms">
 
             <div class="form-signin">
-                    <form method="POST" action="{{ route('register') }}" class="">
+                    <form method="POST" action="{{ url('profile') }}" class="">
                             @csrf
-                        <input id="name" placeholder="Nombre" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                        <input id="business_name" placeholder="Nombre de la Empresa" type="text" class="form-control @error('business_name') is-invalid @enderror" name="business_name" value="{{ old('business_name') }}" required autocomplete="business_name" autofocus>
 
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                        <input id="last_name" placeholder="Apellido" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
-
-                                    @error('last_name')
+                                    @error('business_name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -150,7 +143,7 @@
                                         </span>
                                     @enderror
 
-                        <input id="password" placeholder="Contraseña" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                        <input id="password" placeholder="Contraseña" type="password" class="form-control @error('password') is-invalid @enderror" name="Password" required autocomplete="new-password">
 
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -159,13 +152,13 @@
 
                                     @enderror
 
-                        <input id="password-confirm"  placeholder="Confirmar contraseña" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                        <input id="password-confirm"  placeholder="Confirmar contraseña" type="password" class="form-control" name="Password2" required autocomplete="new-password">
+                        <input  name="type" type="hidden" value="2">
 
                         <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-user-plus"></i>
                                        Registrar
                         </button>
                         </form>
-                        <a class="btn btn-primary btn-block" href="{{ url('register/business')}}">Registrate como empresa</a>
 </div>
 
     <p style="text-align:center">

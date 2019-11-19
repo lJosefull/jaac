@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\TryCatch;
 use Swift;
-use Auth;
+
 use App\Education;
 use DB;
 use App\User;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use validateRequest;
 class LoginsController extends Controller
 {
@@ -103,8 +104,8 @@ class LoginsController extends Controller
                 case 2:
                 $validator = Validator::make($request->all(),[
 
-                    'Business_name'=>'required|string',
-                    'Email'=>'required|email',
+                    'business_name'=>'required|string',
+                    'email'=>'required|email',
                     'Password'=>'required',
                     'Password2'=>'required'
                      ]);
@@ -119,17 +120,17 @@ class LoginsController extends Controller
               if($request->Password==$request->Password2)
               {
                   $user= new User();
-                  $user->name=$request->Business_name;
-                  $user->business_name=$request->Business_name;
-                  $user->email=$request->Email;
-                  $user->password=bcrypt($request->Password);
+                  $user->name=$request->business_name;
+                  $user->business_name=$request->business_name;
+                  $user->email=$request->email;
+                  $user->password=bcrypt($request->password);
                   $user->profile_type=2;
                   $user->cb_roles_id=0;
                   $user->role='business';
 
                   $user->save();
-                  auth()->login($user);
-                  return redirect()->route('home');
+                  Auth()->login($user);
+                  return redirect('/home');
               }else
               {
                return redirect()->back()->with('flas_message_erros','contraseña no son iguales');
